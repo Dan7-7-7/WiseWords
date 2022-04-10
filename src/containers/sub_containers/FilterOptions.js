@@ -3,13 +3,13 @@ import AuthorFilter from "../../components/FilterOptions/AuthorFilter";
 import MoodFilter from "../../components/FilterOptions/MoodFilter";
 import RandomQuote from "../../components/FilterOptions/RandomQuote";
 
-const FilterOptions = () => {
+const FilterOptions = ({random}) => {
 
     return (
         <>
             <AuthorFilter />
             <MoodFilter />
-            <RandomQuote />
+            <RandomQuote random = {random}/>
         </>
     )
 }

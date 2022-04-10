@@ -1,9 +1,9 @@
 import React from "react";
 
-const RandomQuote = () => {
+const RandomQuote = ({random}) => {
 
     return (
-        <p>random quote here</p>
+        <button onClick={random}>Just gimme a Quote!</button>
     )
 }
 

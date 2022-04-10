@@ -6,7 +6,12 @@ import FilterOptions from "./sub_containers/FilterOptions";
 
 const QuotesBox = () => {
 
-    const [quotes, setQuotes] = useState([]);
+    const [quotes, setQuotes] = useState([
+        {
+            content: '',
+            author: ''
+        }
+    ]);
 
     const [favourites, setFavourites] = useState([]);
 
@@ -16,6 +21,7 @@ const QuotesBox = () => {
 
     useEffect(() => {
         getTags();
+        getRandomQuote();
     }, []);
 
     const getRandomQuote = () => {
@@ -61,8 +67,8 @@ const QuotesBox = () => {
         <>
             <Heading />
             <Favourites />
-            <FilterOptions />
-            <QuoteDisplay />
+            <FilterOptions random={getRandomQuote}/>
+            <QuoteDisplay quotes={quotes}/>
         </>
     )
 }
