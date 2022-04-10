@@ -2,7 +2,7 @@ import React from "react";
 
 const MoodFilter = ({tags, getTagQuotes}) => {
 
-    const tagOptions = tags.map(tag => <option value={tag}>{tag}</option>)
+    const tagOptions = tags.map((tag, index) => <option key={index} value={tag}>{tag}</option>)
 
     const handleChange = (event) => {
         getTagQuotes(event.target.value);

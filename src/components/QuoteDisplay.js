@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import QuoteButtons from "./QuoteButtons";
 
-const QuoteDisplay = ({quotes}) => {
+const QuoteDisplay = ({quotes, favourite}) => {
 
     const [quote, setQuote] = useState(quotes[0]);
 
@@ -21,10 +21,15 @@ const QuoteDisplay = ({quotes}) => {
         index > 0 ? setQuote(quotes[index-1]) : setQuote(quotes[0]);
     }
 
+    const handleClick = () => {
+        favourite(quote);
+    }
+
     return (
         <>
             <h2>{quote.content}</h2>
             <h4>{quote.author}</h4>
+            <button onClick={handleClick}>Add to Favourites</button>
             <QuoteButtons next={nextQuote} previous={previousQuote} quotes={quotes} quote={quote}/>
         </>
     )

@@ -75,12 +75,18 @@ const QuotesBox = () => {
     //     .then(result => setAuthors(result.results.map(author => author.name)));
     // }
 
+    const addFavourite = (quote) => {
+        if(favourites.includes(quote) === false){
+            setFavourites([...favourites, quote]);
+        }
+    }
+
     return (
         <>
             <Heading />
-            <Favourites />
+            <Favourites favourites={favourites}/>
             <FilterOptions random={getRandomQuote} author={getAuthorQuotes} tags={tags} getTagQuotes={getTagQuotes}/>
-            <QuoteDisplay quotes={quotes}/>
+            <QuoteDisplay quotes={quotes} favourite={addFavourite}/>
         </>
     )
 }
