@@ -23,6 +23,17 @@ const QuotesBox = () => {
         getTags();
     }, []);
 
+    // const resetQuote = () => {
+    //     if(quotes === []){
+    //         setQuotes([
+    //             {
+    //                 content: 'No quotes found',
+    //                 author: ''
+    //             }
+    //         ])
+    //     }
+    // }
+
     const getRandomQuote = () => {
         fetch('https://api.quotable.io/random')
         .then(result => result.json())
@@ -30,9 +41,11 @@ const QuotesBox = () => {
     }
 
     const getAuthorQuotes = (queryAuthor) => {
-        fetch(`https://api.quotable.io/search/quotes?query=${queryAuthor}&fields=author`)
-        .then(result => result.json())
-        .then(result => setQuotes(result.results));
+        if(queryAuthor !== ''){
+            fetch(`https://api.quotable.io/search/quotes?query=${queryAuthor}&fields=author`)
+            .then(result => result.json())
+            .then(result => setQuotes(result.results.length === 0 ? [{content: 'no quotes found', author: ''}] : result.results));
+        }
     }
 
     // .map(result => {result.author : result.content}))
@@ -66,7 +79,7 @@ const QuotesBox = () => {
         <>
             <Heading />
             <Favourites />
-            <FilterOptions random={getRandomQuote}/>
+            <FilterOptions random={getRandomQuote} author={getAuthorQuotes}/>
             <QuoteDisplay quotes={quotes}/>
         </>
     )

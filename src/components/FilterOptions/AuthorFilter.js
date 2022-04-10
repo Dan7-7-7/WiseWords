@@ -1,9 +1,16 @@
 import React from "react";
 
-const AuthorFilter = () => {
+const AuthorFilter = ({author}) => {
+
+    const handleChange = (event) => {
+        author(event.target.value);
+    }
 
     return (
-        <p>authorfilter here</p>
+        <>
+            <label htmlFor="author-search">Search for an author: </label>
+            <input id="author-search" type="text" onChange={handleChange}/>
+        </>
     )
 }
 
