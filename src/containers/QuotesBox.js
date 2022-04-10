@@ -6,8 +6,12 @@ const QuotesBox = () => {
 
     const [favourites, setFavourites] = useState([]);
 
+    const [tags, setTags] = useState([]);
+
+    const [authors, setAuthors] = useState([]);
+
     useEffect(() => {
-        getRandomQuote();
+        getTags();
     }, []);
 
     const getRandomQuote = () => {
@@ -19,14 +23,25 @@ const QuotesBox = () => {
     const getAuthorQuotes = (author) => {
         fetch(`https://quotable.io/quotes?author=${author}`)
         .then(result => result.json())
-        .then(result => setQuotes([result]));
+        .then(result => setQuotes(result.results));
+    }
+    
+    const searchAuthorQuotes = (author) => {
+        fetch(`https://api.quotable.io/search/quotes?query=${author}&fields=author`)
+        .then(result => result.json())
+        .then(result => setQuotes(result.results));
     }
 
     const getTagQuotes = (tag) => {
         fetch(`https://quotable.io/quotes?tags=${tag}`)
         .then(result => result.json())
-        .then(result => setQuotes([result]));
+        .then(result => setQuotes(result.results));
     }
+
+    const getTags = () => {fetch('https://quotable.io/tags')
+    .then(result => result.json())
+    .then(result => result.map(tag => tag.name))
+    .then(result => setTags(result));}
 
     return (
         <h1>this is the container for the quotes and the select inputs</h1>
