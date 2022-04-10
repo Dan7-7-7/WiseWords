@@ -1,9 +1,20 @@
 import React from "react";
 
-const MoodFilter = () => {
+const MoodFilter = ({tags, getTagQuotes}) => {
+
+    const tagOptions = tags.map(tag => <option value={tag}>{tag}</option>)
+
+    const handleChange = (event) => {
+        getTagQuotes(event.target.value);
+    }
 
     return (
-        <p>MoodFilter here</p>
+        <>
+            <label htmlFor="moods">What's on your mind today?</label>
+            <select name="moods" id="moods" onChange={handleChange}>
+                {tagOptions}
+            </select>
+        </>
     )
 }
 

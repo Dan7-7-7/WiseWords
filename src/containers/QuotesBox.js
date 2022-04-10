@@ -79,7 +79,7 @@ const QuotesBox = () => {
         <>
             <Heading />
             <Favourites />
-            <FilterOptions random={getRandomQuote} author={getAuthorQuotes}/>
+            <FilterOptions random={getRandomQuote} author={getAuthorQuotes} tags={tags} getTagQuotes={getTagQuotes}/>
             <QuoteDisplay quotes={quotes}/>
         </>
     )
