@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import QuoteButtons from "./QuoteButtons";
+import './QuoteDisplay.css';
 
 const QuoteDisplay = ({quotes, favourite}) => {
 
@@ -26,12 +27,11 @@ const QuoteDisplay = ({quotes, favourite}) => {
     }
 
     return (
-        <>
+        <div className="quote-display">
             <h2>{quote.content}</h2>
-            <h4>{quote.author}</h4>
-            <button onClick={handleClick}>Add to Favourites</button>
-            <QuoteButtons next={nextQuote} previous={previousQuote} quotes={quotes} quote={quote}/>
-        </>
+            <h3>{quote.author}</h3>
+            <QuoteButtons next={nextQuote} previous={previousQuote} quotes={quotes} quote={quote} handleClick={handleClick}/>
+        </div>
     )
 }
 

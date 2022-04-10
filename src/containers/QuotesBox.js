@@ -3,6 +3,7 @@ import Heading from "../components/Heading";
 import Favourites from "../components/Favourites";
 import QuoteDisplay from "../components/QuoteDisplay";
 import FilterOptions from "./sub_containers/FilterOptions";
+import './QuotesBox.css';
 
 const QuotesBox = () => {
 
@@ -44,7 +45,7 @@ const QuotesBox = () => {
         if(queryAuthor !== ''){
             fetch(`https://api.quotable.io/search/quotes?query=${queryAuthor}&fields=author`)
             .then(result => result.json())
-            .then(result => setQuotes(result.results.length === 0 ? [{content: 'no quotes found', author: ''}] : result.results));
+            .then(result => setQuotes(result.results.length === 0 ? [{content: '', author: ''}] : result.results));
         }
     }
 
@@ -84,9 +85,9 @@ const QuotesBox = () => {
     return (
         <>
             <Heading />
-            <Favourites favourites={favourites}/>
             <FilterOptions random={getRandomQuote} author={getAuthorQuotes} tags={tags} getTagQuotes={getTagQuotes}/>
             <QuoteDisplay quotes={quotes} favourite={addFavourite}/>
+            <Favourites favourites={favourites}/>
         </>
     )
 }

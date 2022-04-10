@@ -1,0 +1,22 @@
+.container {
+    background-color: #ACCBE1;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.1px;
+}
+
+.favourites {
+    background-color: #ACCBE1;
+    font-size: x-large;
+    font-family: cursive;
+    margin: 0;
+}
+
+h4 {
+    background-color: #ACCBE1;
+    font-size: x-large;
+    font-family: cursive;
+}

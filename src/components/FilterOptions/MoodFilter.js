@@ -10,7 +10,7 @@ const MoodFilter = ({tags, getTagQuotes}) => {
 
     return (
         <>
-            <label htmlFor="moods">What's on your mind today?</label>
+            <label htmlFor="moods">What's on your mind today? </label>
             <select name="moods" id="moods" onChange={handleChange}>
                 {tagOptions}
             </select>

@@ -1,8 +1,11 @@
 import React from "react";
+import './Heading.css';
 
 const Heading = () => {
     return (
-        <h1>WiseWords</h1>
+        <>
+            <h1>WiseWords</h1>
+        </>
     )
 }
 
