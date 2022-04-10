@@ -1,4 +1,8 @@
 import React, {useState, useEffect} from "react";
+import Heading from "../components/Heading";
+import Favourites from "../components/Favourites";
+import QuoteDisplay from "../components/QuoteDisplay";
+import FilterOptions from "./sub_containers/FilterOptions";
 
 const QuotesBox = () => {
 
@@ -8,7 +12,7 @@ const QuotesBox = () => {
 
     const [tags, setTags] = useState([]);
 
-    const [authors, setAuthors] = useState([]);
+    // const [authors, setAuthors] = useState([]);
 
     useEffect(() => {
         getTags();
@@ -20,17 +24,19 @@ const QuotesBox = () => {
         .then(result => setQuotes([result]));
     }
 
-    const getAuthorQuotes = (author) => {
-        fetch(`https://quotable.io/quotes?author=${author}`)
+    const getAuthorQuotes = (queryAuthor) => {
+        fetch(`https://api.quotable.io/search/quotes?query=${queryAuthor}&fields=author`)
         .then(result => result.json())
         .then(result => setQuotes(result.results));
     }
+
+    // .map(result => {result.author : result.content}))
     
-    const searchAuthorQuotes = (author) => {
-        fetch(`https://api.quotable.io/search/quotes?query=${author}&fields=author`)
-        .then(result => result.json())
-        .then(result => setQuotes(result.results));
-    }
+    // const searchQuotes = (query) => {
+    //     fetch(`https://api.quotable.io/search/quotes?query=${query}`)
+    //     .then(result => result.json())
+    //     .then(result => setQuotes(result.results));
+    // }
 
     const getTagQuotes = (tag) => {
         fetch(`https://quotable.io/quotes?tags=${tag}`)
@@ -38,13 +44,26 @@ const QuotesBox = () => {
         .then(result => setQuotes(result.results));
     }
 
-    const getTags = () => {fetch('https://quotable.io/tags')
-    .then(result => result.json())
-    .then(result => result.map(tag => tag.name))
-    .then(result => setTags(result));}
+    const getTags = () => {
+        fetch('https://quotable.io/tags')
+        .then(result => result.json())
+        .then(result => result.map(tag => tag.name))
+        .then(result => setTags(result));
+    }
+
+    // const getAuthors = () => {
+    //     fetch('https://quotable.io/authors?sortBy=name&order=asc')
+    //     .then(result => result.json())
+    //     .then(result => setAuthors(result.results.map(author => author.name)));
+    // }
 
     return (
-        <h1>this is the container for the quotes and the select inputs</h1>
+        <>
+            <Heading />
+            <Favourites />
+            <FilterOptions />
+            <QuoteDisplay />
+        </>
     )
 }
 
@@ -53,12 +72,14 @@ export default QuotesBox;
 // heading COMPONENT
 // favoutires box (either displayed or with a button to display)
 // three options in a flex row: CONTAINER
-            // choose a quotifier (author) => list of quotes, click through one by one with a "next" button COMPONENT
-                // https://api.quotable.io/search/quotes?query=kennedy&fields=author
-            // what's on your mind today? (list of keyword topics) => as above COMPONENT
-                // https://api.quotable.io/random?tags=history%7Ccivil-rights (NB this is a single random quote each time)
+            // choose a quotifier (author, search bar) => list of quotes, click through one by one with a "next" button COMPONENT
+                // getAuthorQuotes (array)
+            // what's on your mind today? (list of keyword topics, select menu) => as above COMPONENT
+                // getTagQuotes (array)
+// try your own search (search bar) COMPONENT DELETED
+    // searchQuotes (array) DELETED
             // just gimme a random quote! => single quote COMPONENT
-                // https://api.quotable.io/random
+                // getRandomQuote (array with one item)
 // the quote box - displaying one quote at a time. COMPONENT
 // (in the first two select cases) a next button IN BOX COMPONENT
 // favourite button
