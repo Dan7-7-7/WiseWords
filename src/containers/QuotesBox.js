@@ -21,7 +21,6 @@ const QuotesBox = () => {
 
     useEffect(() => {
         getTags();
-        getRandomQuote();
     }, []);
 
     const getRandomQuote = () => {
