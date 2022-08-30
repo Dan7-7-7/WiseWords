@@ -1,15 +1,17 @@
 import React from "react";
 
-const AuthorFilter = ({author}) => {
+const AuthorFilter = ({getAuthorQuotes, currentAuthor, setCurrentAuthor, resetCurrentTag}) => {
 
     const handleChange = (event) => {
-        author(event.target.value);
+        setCurrentAuthor(event.target.value)
+        resetCurrentTag();
+        getAuthorQuotes(event.target.value);
     }
 
     return (
         <>
             <label htmlFor="author-search">Search for an author: </label>
-            <input id="author-search" type="text" onChange={handleChange}/>
+            <input id="author-search" type="text" value={currentAuthor} onChange={handleChange}/>
         </>
     )
 }

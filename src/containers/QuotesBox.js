@@ -24,17 +24,6 @@ const QuotesBox = () => {
         getTags();
     }, []);
 
-    // const resetQuote = () => {
-    //     if(quotes === []){
-    //         setQuotes([
-    //             {
-    //                 content: 'No quotes found',
-    //                 author: ''
-    //             }
-    //         ])
-    //     }
-    // }
-
     const getRandomQuote = () => {
         fetch('https://api.quotable.io/random')
         .then(result => result.json())
@@ -45,11 +34,11 @@ const QuotesBox = () => {
         if(queryAuthor !== ''){
             fetch(`https://api.quotable.io/search/quotes?query=${queryAuthor}&fields=author`)
             .then(result => result.json())
-            .then(result => setQuotes(result.results.length === 0 ? [{content: '', author: ''}] : result.results));
+            .then(result => setQuotes(result.results.length === 0 ? [{content: 'No quotes found', author: ''}] : result.results));
         }
     }
 
-    // .map(result => {result.author : result.content}))
+    
     
     // const searchQuotes = (query) => {
     //     fetch(`https://api.quotable.io/search/quotes?query=${query}`)
@@ -60,7 +49,7 @@ const QuotesBox = () => {
     const getTagQuotes = (tag) => {
         fetch(`https://quotable.io/quotes?tags=${tag}`)
         .then(result => result.json())
-        .then(result => setQuotes(result.results));
+        .then(result => setQuotes(result.results.length === 0 ? [{content: 'No quotes found', author: ''}] : result.results));
     }
 
     const getTags = () => {
@@ -85,7 +74,7 @@ const QuotesBox = () => {
     return (
         <>
             <Heading />
-            <FilterOptions random={getRandomQuote} author={getAuthorQuotes} tags={tags} getTagQuotes={getTagQuotes}/>
+            <FilterOptions getRandomQuote={getRandomQuote} getAuthorQuotes={getAuthorQuotes} tags={tags} getTagQuotes={getTagQuotes}/>
             <QuoteDisplay quotes={quotes} favourite={addFavourite}/>
             <Favourites favourites={favourites}/>
         </>
@@ -94,23 +83,8 @@ const QuotesBox = () => {
 
 export default QuotesBox;
 
-// heading COMPONENT
-// favoutires box (either displayed or with a button to display)
-// three options in a flex row: CONTAINER
-            // choose a quotifier (author, search bar) => list of quotes, click through one by one with a "next" button COMPONENT
-                // getAuthorQuotes (array)
-            // what's on your mind today? (list of keyword topics, select menu) => as above COMPONENT
-                // getTagQuotes (array)
-// try your own search (search bar) COMPONENT DELETED
-    // searchQuotes (array) DELETED
-            // just gimme a random quote! => single quote COMPONENT
-                // getRandomQuote (array with one item)
-// the quote box - displaying one quote at a time. COMPONENT
-// (in the first two select cases) a next button IN BOX COMPONENT
-// favourite button
-// optional footer (or header): quote of the day COMPONENT
-
-
-// STATE
-// the quotes (array or object)
-// favourites (array)
+// TODO:
+// set up cypress testing
+// either clear input boxes when the other is selected or random button is pressed, or make it a dual search (author and tag)
+// splice together the zen quotes api and this one
+// build in flutter!

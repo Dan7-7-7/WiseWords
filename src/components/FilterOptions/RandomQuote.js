@@ -1,9 +1,15 @@
 import React from "react";
 
-const RandomQuote = ({random}) => {
+const RandomQuote = ({getRandomQuote, resetCurrentAuthor, resetCurrentTag}) => {
+
+    const handleClick = () => {
+        resetCurrentAuthor();
+        resetCurrentTag();
+        getRandomQuote();
+    }
 
     return (
-        <button className="random" onClick={random}>Just gimme a Quote!</button>
+        <button className="random" onClick={handleClick}>Just gimme a Quote!</button>
     )
 }
 

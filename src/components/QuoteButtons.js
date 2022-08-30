@@ -4,7 +4,7 @@ const QuoteButtons = ({next, previous, quotes, quote, handleClick}) => {
 
     const needNextButton = quotes.length > 1;
     const needPreviousButton = quotes.indexOf(quote) !== 0;
-    const needFavouritesButton = quote.content !== '';
+    const needFavouritesButton = quote.content !== '' && quote.content !== 'No quotes found';
 
     let favouritesButton, previousButton, nextButton;
 
